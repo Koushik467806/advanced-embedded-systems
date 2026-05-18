@@ -40,6 +40,10 @@ Functions:
 
 For 010110010010 (Divide as (0101)(1001)(0010)):
 
-1. 0101 is opcode: Tells which opeartion to perform (last 0/1: increment value (INCI)/ increment address provided (INCA)) 
+1. 0101 is opcode: Tells which opeartion to perform (last 0/1: increment value (INCI)/ increment address provided (INCA))
 2. 1001 and 0010 are operand: Opeartions are performed on operands
+
+
+
+**Status Register:** Checks the status of previous task
 
