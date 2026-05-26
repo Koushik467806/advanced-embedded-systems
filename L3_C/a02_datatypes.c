@@ -1,4 +1,5 @@
-#include <Stdio.h>
+#include <stdio.h>
+#include <stdbool.h>
 
 int main(){
     /* Basic Datatypes
@@ -78,4 +79,8 @@ int main(){
     // Used to declare read-only variables
     // Always assign value when declaring
     const int MYNUM = 10;
+
+    // Bool - Yes or No
+    bool isHappy = true;
+    bool isSad = false;
 }
