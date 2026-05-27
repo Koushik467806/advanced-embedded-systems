@@ -24,4 +24,6 @@ int main(){
     for(int j = 0; j < 5; j++){ // Starts at j = 0, Goes till j < 5, j is incremented after every iteration
         printf("j");
     }
+
+    return 0;
 }

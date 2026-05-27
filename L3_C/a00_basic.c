@@ -5,7 +5,7 @@ int main(){
     printf("\n"); // For new line
     printf("\t"); // Tab space
     printf("\""); // For quote
-    printf("\\"); // For \
+    printf("\\"); // For "\"
     return 0;
 }
 

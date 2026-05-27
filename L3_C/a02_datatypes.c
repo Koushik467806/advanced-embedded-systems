@@ -83,4 +83,6 @@ int main(){
     // Bool - Yes or No
     bool isHappy = true;
     bool isSad = false;
+
+    return 0;
 }

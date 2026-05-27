@@ -60,4 +60,6 @@ int main(){
         default: // Runs when all cases are false
             printf("Nothing");
         }
+
+    return 0;
 }
