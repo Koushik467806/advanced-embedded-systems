@@ -42,6 +42,15 @@ int main(){
         printf("False"); // Runs if either of the statements is correct
     }
 
+    // Bitwise Operators: &, |, ^, ~, <<, >>
+    int a = 6, b = 5; // a = 0110, b = 0011 in binary
+    printf("%d", a & b); // AND: 0010
+    printf("%d", a | b); // OR: 0111
+    printf("%d", a ^ b); // XOR: 0101
+    printf("%d", ~a); // NOT: ..1001
+    printf("%d", a << 1); // Left Shift (* 2)
+    printf("%d", a >> 1); // Right Shift (/ 2)
+
     // Opertor Precedence
     /*
     1. ()
