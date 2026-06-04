@@ -77,6 +77,22 @@ __attribute__((weak)) int _read(int file, char *ptr, int len)
   return len;
 }
 
+int ITM_SendChar(int ch)
+{
+    // Check if ITM and Stimulus Port 0 are enabled by the debugger hardware
+    if (((*(volatile uint32_t *)0xE000ED94) & 1UL) && ((*(volatile uint32_t *)0xE000E000) & 1UL))
+    {
+        // Wait until the Port 0 buffer is ready
+        while ((*(volatile uint32_t *)0xE000E000) == 0UL)
+        {
+            __asm("NOP");
+        }
+        // Write character byte to Port 0
+        (*(volatile uint8_t *)0xE000E000) = (uint8_t)ch;
+    }
+    return ch;
+}
+
 __attribute__((weak)) int _write(int file, char *ptr, int len)
 {
   (void)file;
@@ -84,7 +100,8 @@ __attribute__((weak)) int _write(int file, char *ptr, int len)
 
   for (DataIdx = 0; DataIdx < len; DataIdx++)
   {
-    __io_putchar(*ptr++);
+    //__io_putchar(*ptr++);
+    ITM_SendChar(*ptr++);
   }
   return len;
 }
