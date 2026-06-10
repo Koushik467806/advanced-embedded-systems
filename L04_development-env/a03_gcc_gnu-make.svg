@@ -1,0 +1,83 @@
+<svg viewBox="0 0 500 720" width="500" height="720" xmlns="http://www.w3.org/2000/svg" style="background-color: #121214; border-radius: 8px; font-family: system-ui, -apple-system, sans-serif; display: block; margin: 10px auto;">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#757575" />
+    </marker>
+  </defs>
+  
+  <text x="250" y="30" fill="#ffffff" font-size="16" font-weight="bold" text-anchor="middle">Embedded Compilation Pipeline</text>
+
+  <!-- Node 1: Source Files -->
+  <rect x="150" y="60" width="200" height="35" rx="6" fill="#3a3f58" stroke="#ffffff" stroke-width="1"/>
+  <text x="250" y="82" fill="#ffffff" font-size="12" font-weight="bold" text-anchor="middle">Source Files (.c, .h)</text>
+
+  <!-- Arrow 1 -->
+  <line x1="250" y1="95" x2="250" y2="115" stroke="#757575" stroke-width="2" marker-end="url(#arrow)" />
+
+  <!-- Node 2: Preprocessor -->
+  <rect x="150" y="120" width="200" height="35" rx="18" fill="#f57c00" stroke="#ffffff" stroke-width="1"/>
+  <text x="250" y="142" fill="#ffffff" font-size="12" font-weight="bold" text-anchor="middle">Preprocessor</text>
+
+  <!-- Arrow 2 -->
+  <line x1="250" y1="155" x2="250" y2="175" stroke="#757575" stroke-width="2" marker-end="url(#arrow)" />
+
+  <!-- Node 3: Preprocessed Files -->
+  <rect x="150" y="180" width="200" height="35" rx="6" fill="#3a3f58" stroke="#ffffff" stroke-width="1"/>
+  <text x="250" y="202" fill="#ffffff" font-size="12" font-weight="bold" text-anchor="middle">Preprocessed Files (.i)</text>
+
+  <!-- Arrow 3 -->
+  <line x1="250" y1="215" x2="250" y2="235" stroke="#757575" stroke-width="2" marker-end="url(#arrow)" />
+
+  <!-- Node 4: Compiler Proper -->
+  <rect x="150" y="240" width="200" height="35" rx="18" fill="#f57c00" stroke="#ffffff" stroke-width="1"/>
+  <text x="250" y="262" fill="#ffffff" font-size="12" font-weight="bold" text-anchor="middle">Compiler Proper</text>
+
+  <!-- Arrow 4 -->
+  <line x1="250" y1="275" x2="250" y2="295" stroke="#757575" stroke-width="2" marker-end="url(#arrow)" />
+
+  <!-- Node 5: Assembly Files -->
+  <rect x="150" y="300" width="200" height="35" rx="6" fill="#3a3f58" stroke="#ffffff" stroke-width="1"/>
+  <text x="250" y="322" fill="#ffffff" font-size="12" font-weight="bold" text-anchor="middle">Assembly Files (.s)</text>
+
+  <!-- Arrow 5 -->
+  <line x1="250" y1="335" x2="250" y2="355" stroke="#757575" stroke-width="2" marker-end="url(#arrow)" />
+
+  <!-- Node 6: Assembler -->
+  <rect x="150" y="360" width="200" height="35" rx="18" fill="#f57c00" stroke="#ffffff" stroke-width="1"/>
+  <text x="250" y="382" fill="#ffffff" font-size="12" font-weight="bold" text-anchor="middle">Assembler</text>
+
+  <!-- Arrow 6 -->
+  <line x1="250" y1="395" x2="250" y2="415" stroke="#757575" stroke-width="2" marker-end="url(#arrow)" />
+
+  <!-- Node 7: Object Files -->
+  <rect x="150" y="420" width="200" height="35" rx="6" fill="#3a3f58" stroke="#ffffff" stroke-width="1"/>
+  <text x="250" y="442" fill="#ffffff" font-size="12" font-weight="bold" text-anchor="middle">Object Files (.o / .obj)</text>
+
+  <!-- Arrow 7 -->
+  <line x1="250" y1="455" x2="250" y2="475" stroke="#757575" stroke-width="2" marker-end="url(#arrow)" />
+
+  <!-- Node 8: Linker -->
+  <rect x="150" y="480" width="200" height="35" rx="18" fill="#f57c00" stroke="#ffffff" stroke-width="1"/>
+  <text x="250" y="502" fill="#ffffff" font-size="12" font-weight="bold" text-anchor="middle">Linker</text>
+
+  <!-- Arrow 8 -->
+  <line x1="250" y1="515" x2="250" y2="535" stroke="#757575" stroke-width="2" marker-end="url(#arrow)" />
+
+  <!-- Node 9: Relocatable File -->
+  <rect x="150" y="540" width="200" height="35" rx="6" fill="#3a3f58" stroke="#ffffff" stroke-width="1"/>
+  <text x="250" y="562" fill="#ffffff" font-size="12" font-weight="bold" text-anchor="middle">Relocatable File</text>
+
+  <!-- Arrow 9 -->
+  <line x1="250" y1="575" x2="250" y2="595" stroke="#757575" stroke-width="2" marker-end="url(#arrow)" />
+
+  <!-- Node 10: Locator -->
+  <rect x="150" y="600" width="200" height="35" rx="18" fill="#f57c00" stroke="#ffffff" stroke-width="1"/>
+  <text x="250" y="622" fill="#ffffff" font-size="12" font-weight="bold" text-anchor="middle">Locator</text>
+
+  <!-- Arrow 10 -->
+  <line x1="250" y1="635" x2="250" y2="655" stroke="#757575" stroke-width="2" marker-end="url(#arrow)" />
+
+  <!-- Node 11: Executable -->
+  <rect x="150" y="660" width="200" height="35" rx="6" fill="#2e7d32" stroke="#ffffff" stroke-width="1"/>
+  <text x="250" y="682" fill="#ffffff" font-size="12" font-weight="bold" text-anchor="middle">Executable (.elf, .hex, .bin)</text>
+</svg>
