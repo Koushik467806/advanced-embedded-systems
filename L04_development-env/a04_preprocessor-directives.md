@@ -1,0 +1,25 @@
+# Preprocessor Directives
+
+- They are special keywords used by preprocessor before compilation
+- They start with "#"
+- Important directives include:
+  - `#define`: Used for defining constants, features or macros
+    - We define macros as `#define <NAME> <VALUE>`
+    - Examples:
+      - `#define MAX_BUFFER_SIZE 1024` (Object-like macro)
+      - `#define SQUARE(x) x*x` (Function-like macro; Note: usually parenthesized as `((x) * (x))` to avoid operator precedence issues)
+  - `#undef`: Removes/undefines a previously defined macro
+  - `#ifdef`: Checks if a macro is defined; compiles subsequent code if it is
+  - `#ifndef`: Checks if a macro is not defined; compiles subsequent code if it is not (commonly used for header guards)
+  - `#elif`: Else-if condition for conditional compilation blocks
+  - `#else`: Fallback else block for conditional compilation checks
+  - `#endif`: Closes/ends a conditional compilation block
+  - `#include`: Includes/inserts the contents of a header file
+    - Example: `<header.h>` for standard/system library headers or `"header.h"` for local user headers
+  - `#warning`: Generates a custom compiler warning message during compilation
+  - `#error`: Halts/aborts compilation with a custom error message
+  - `#pragma`: Passes compiler-specific or toolchain-specific instructions to the compiler
+    - Examples:
+      - `#pragma once`: Prevents a header file from being included multiple times (alternative to header guards)
+      - `#pragma pack(1)`: Packs structure members with 1-byte alignment to prevent compiler padding (critical in embedded systems for matching hardware registers or network packets)
+      - `#pragma GCC poison printf`: Bans the use of the identifier `printf` from the code. If `printf` is used anywhere after this directive, the GCC compiler will raise a compilation error (commonly used in embedded systems to enforce coding standards, e.g., banning functions like `printf` or `malloc` to save memory or avoid undefined behavior)
