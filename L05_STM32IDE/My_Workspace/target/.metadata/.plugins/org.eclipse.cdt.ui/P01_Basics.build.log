@@ -1,0 +1,10 @@
+15:50:01 **** Incremental Build of configuration Debug for project P01_Basics ****
+make -j16 all 
+arm-none-eabi-size  P01_Basics.elf 
+   text	   data	    bss	    dec	    hex	filename
+   3388	     92	   1900	   5380	   1504	P01_Basics.elf
+Finished building: default.size.stdout
+ 
+
+15:50:01 Build Finished. 0 errors, 0 warnings. (took 150ms)
+
