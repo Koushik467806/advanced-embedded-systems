@@ -53,3 +53,12 @@ dkms.conf
 
 # debug information files
 *.dwo
+
+# ----------------------------------------
+# STM32CubeIDE / Eclipse Specific Ignores
+# ----------------------------------------
+.metadata/
+.history/
+**/RemoteSystemsTempFiles/
+**/Debug/
+**/Release/

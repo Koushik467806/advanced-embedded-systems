@@ -1,5 +1,0 @@
-16:14:44 **** Rebuild of configuration Debug for project P01_Basics ****
-Info: Internal Builder is used for build
-gcc -O0 -g3 -Wall -c -fmessage-length=0 -o main.o "..\\main.c" 
-gcc -o P01_Basics.exe main.o 
-Info: Nothing to build for P01_Basics
