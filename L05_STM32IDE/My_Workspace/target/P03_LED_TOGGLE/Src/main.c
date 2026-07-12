@@ -24,28 +24,51 @@
 
 int main(void)
 {
-    uint32_t *AHB1ENR    = (uint32_t*)0x40023830;
-    uint32_t *GPIOD_MODE = (uint32_t*)0x40020C00;
-    uint32_t *OUTPUT     = (uint32_t*)0x40020C14;
+	uint32_t *AHB1ENR    = (uint32_t*)0x40023830;
+	uint32_t *GPIOD_MODE = (uint32_t*)0x40020C00;
+	uint32_t *OUTPUT     = (uint32_t*)0x40020C14;
 
-    // 1. Enable Clock for AHB1
-    // *AHB1ENR |= 0x08;
-    *AHB1ENR |= (1 << 3);
+	/*
+	 *               PD13 -> ORANGE
+	 * PD12 -> GREEN                PD14 -> RED
+	 *                PD15 -> BLUE
+	 */
 
-    // LEDs at PD12, PD13, PD14, PD15
-
-    // 2. Configure MODE of GPIOD as output
+	// Enabling clock, setting pin to output (PD12, PD13, PD14, PD15)
+	*AHB1ENR |= (1 << 3);
     *GPIOD_MODE &= ~(255 << 24); // Clearing bits from 24 to 31 (4 LEDs)
     *GPIOD_MODE |= (1 << 24); // Setting pin to high
     *GPIOD_MODE |= (1 << 26);
     *GPIOD_MODE |= (1 << 28);
     *GPIOD_MODE |= (1 << 30);
 
-    //3. Make IO pin high
-    *OUTPUT |= (1 << 12);
-    *OUTPUT |= (1 << 13);
-    *OUTPUT |= (1 << 14);
-    *OUTPUT |= (1 << 15);
+	while(1){
+		// 12 ON
+	    *OUTPUT |= (1 << 12);
+	    *OUTPUT &= ~(1 << 13);
+	    *OUTPUT &= ~(1 << 14);
+	    *OUTPUT &= ~(1 << 15);
+	    for(uint32_t i =0; i<100000; i++); // Software delay
 
-	for(;;);
+	    // 13 ON
+	    *OUTPUT &= ~(1 << 12);
+	    *OUTPUT |= (1 << 13);
+	    *OUTPUT &= ~(1 << 14);
+	    *OUTPUT &= ~(1 << 15);
+	    for(uint32_t i =0; i<100000; i++);
+
+	    // 14 ON
+	    *OUTPUT &= ~(1 << 12);
+	    *OUTPUT &= ~(1 << 13);
+	    *OUTPUT |= (1 << 14);
+	    *OUTPUT &= ~(1 << 15);
+	    for(uint32_t i =0; i<100000; i++);
+
+	    // 15 ON
+	    *OUTPUT &= ~(1 << 12);
+	    *OUTPUT &= ~(1 << 13);
+	    *OUTPUT &= ~(1 << 14);
+	    *OUTPUT |= (1 << 15);
+	    for(uint32_t i =0; i<100000; i++);
+	}
 }
