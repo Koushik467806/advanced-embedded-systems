@@ -46,6 +46,22 @@
 - In simple systems, each signal change represents one bit → baud rate equals bit rate
 - In more complex systems, each signal change can represent multiple bits → bit rate is higher than baud rate
 
+### Formula
+
+- **Baud Rate equation:**
+  ```text
+  Baud Rate = f_CK / (16 * USARTDIV)
+  ```
+
+- **USARTDIV (Register Divider) equation:**
+  ```text
+  USARTDIV = f_CK / (16 * Baud Rate)
+  ```
+
+Where:
+- `f_CK`: Peripheral clock frequency (in Hz)
+- `USARTDIV`: Fixed-point divisor loaded into `USART_BRR`
+
 ### Standard Baud Rates
 
 | Baud Rate | Use Case |
