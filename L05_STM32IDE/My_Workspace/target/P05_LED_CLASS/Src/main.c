@@ -17,22 +17,18 @@
  */
 
 #include <stdint.h>
-#include <stdio.h>
-#include "uart.h"
+#include "led.h"
 
 #if !defined(__SOFT_FP__) && defined(__ARM_FP)
   #warning "FPU is not initialized, but the project is compiling for an FPU. Please initialize the FPU before use."
 #endif
 
-int main(void){
-	USART2_init();
-	//test();
+LED_Type led1;
 
-	setvbuf(stdout, NULL, _IONBF, 0);
+int main(void)
+{
+	LED_constructor(&led1, RED, ON);
+    while(1){
 
-	while(1) {
-	        printf("Hello\r\n");
-	        for(volatile int i=0;i<500000;i++);
-	}
+    }
 }
-
