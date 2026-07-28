@@ -23,12 +23,17 @@
   #warning "FPU is not initialized, but the project is compiling for an FPU. Please initialize the FPU before use."
 #endif
 
-LED_Type led1;
+LED_Type led_red;
+LED_Type led_orange;
+LED_Type led_green;
+LED_Type led_blue;
 
 int main(void)
 {
-	LED_constructor(&led1, RED, ON);
-    while(1){
+    LED_constructor(&led_red, RED, OFF);
+    LED_constructor(&led_orange, ORANGE, OFF);
+    LED_constructor(&led_green, GREEN, OFF);
+    LED_constructor(&led_blue, BLUE, OFF);
 
-    }
+    while(1) { }
 }
