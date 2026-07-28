@@ -17,23 +17,27 @@
  */
 
 #include <stdint.h>
-#include "led.h"
+#include "powerLed.h"
 
 #if !defined(__SOFT_FP__) && defined(__ARM_FP)
   #warning "FPU is not initialized, but the project is compiling for an FPU. Please initialize the FPU before use."
 #endif
 
-LED_Type led_red;
-LED_Type led_orange;
-LED_Type led_green;
-LED_Type led_blue;
+PowerLED_Type led_red;
+PowerLED_Type led_orange;
+PowerLED_Type led_green;
+PowerLED_Type led_blue;
+
+led_elec_type led1_power;
+led_elec_type led2_power;
 
 int main(void)
 {
-    LED_constructor(&led_red, RED, OFF);
-    LED_constructor(&led_orange, ORANGE, OFF);
-    LED_constructor(&led_green, GREEN, OFF);
-    LED_constructor(&led_blue, BLUE, OFF);
+    PowerLED_constructor(&led_red, RED, ON, DIAM_5MM, CURR_NORMAL, VOL_NORMAL);
+    PowerLED_constructor(&led_orange, ORANGE, ON, DIAM_7MM, CURR_HIGH, VOL_NORMAL);
+
+    led1_power = PowerLED_computePower(&led_red);
+    led2_power = PowerLED_computePower(&led_orange);
 
     while(1) { }
 }
