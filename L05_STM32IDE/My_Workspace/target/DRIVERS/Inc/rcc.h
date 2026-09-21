@@ -79,15 +79,6 @@
 /*
  * AHB1 Peripheral Clock Enable Macros
  */
-#define GPIOA_PCLK_EN()    (RCC->AHB1ENR |= (1U << GPIOAReset))
-#define GPIOB_PCLK_EN()    (RCC->AHB1ENR |= (1U << GPIOBReset))
-#define GPIOC_PCLK_EN()    (RCC->AHB1ENR |= (1U << GPIOCReset))
-#define GPIOD_PCLK_EN()    (RCC->AHB1ENR |= (1U << GPIODReset))
-#define GPIOE_PCLK_EN()    (RCC->AHB1ENR |= (1U << GPIOEReset))
-#define GPIOF_PCLK_EN()    (RCC->AHB1ENR |= (1U << GPIOFReset))
-#define GPIOG_PCLK_EN()    (RCC->AHB1ENR |= (1U << GPIOGReset))
-#define GPIOH_PCLK_EN()    (RCC->AHB1ENR |= (1U << GPIOHReset))
-#define GPIOI_PCLK_EN()    (RCC->AHB1ENR |= (1U << GPIOIReset))
 #define CRC_PCLK_EN()      (RCC->AHB1ENR |= (1U << CRCReset))
 #define DMA1_PCLK_EN()     (RCC->AHB1ENR |= (1U << DMA1Reset))
 #define DMA2_PCLK_EN()     (RCC->AHB1ENR |= (1U << DMA2Reset))
@@ -133,6 +124,7 @@
 /*
  * AHB1 Peripheral Clock Disable Macros
  */
+#ifndef GPIOA_PCLK_DI
 #define GPIOA_PCLK_DI()    (RCC->AHB1ENR &= ~(1U << GPIOAReset))
 #define GPIOB_PCLK_DI()    (RCC->AHB1ENR &= ~(1U << GPIOBReset))
 #define GPIOC_PCLK_DI()    (RCC->AHB1ENR &= ~(1U << GPIOCReset))
@@ -147,7 +139,7 @@
 #define DMA2_PCLK_DI()     (RCC->AHB1ENR &= ~(1U << DMA2Reset))
 #define ETHMAC_PCLK_DI()   (RCC->AHB1ENR &= ~(1U << ETHMACReset))
 #define OTGHS_PCLK_DI()    (RCC->AHB1ENR &= ~(1U << OTGHSReset))
-
+#endif
 /*
  * APB1 Peripheral Clock Disable Macros
  */

@@ -4,6 +4,7 @@
  *  Created on: 20-Sept-2026
  *      Author: def85
  */
+#include "rcc.h"
 
 uint8_t RCC_SetSysClockFrequency(uint32_t targetFreq){
 	// 1. Conditions for hardware to work
@@ -28,8 +29,13 @@ uint8_t RCC_SetSysClockFrequency(uint32_t targetFreq){
 	if(targetFreq > 84000000UL) APB2Freq = targetFreq / 2;
 	else APB2Freq = targetFreq;
 
+	/* Not using now but for future debugging */
+	(void)AHBFreq;
+	(void)APB1Freq;
+	(void)APB2Freq;
+
 	// 4. Enabling HSE
-	RCC->CR |= (1UL << 16); // ENable Bit
+	RCC->CR |= (1UL << 16); // Enable Bit
 	while(!(RCC->CR & (1U << 17))); // Wait till ready
 
 	// 5. Configure PLL
@@ -74,26 +80,28 @@ const uint16_t AHBPrescalerTable[16] = {1, 1, 1, 1, 1, 1, 1, 1, 2, 4, 8, 16, 64,
 // APB Prescaler division factors indexed by (PPRE bitfield value)
 const uint8_t APBPrescalerTable[8] = {1, 1, 1, 1, 2, 4, 8, 16};
 
-uint32_t RCC_GetSysClockValue(void){
-	uint8_t clkSource = (RCC->CFGR >> 2) & 0x3UL; // Checking source
+uint32_t RCC_GetSysClockValue(void) {
+    uint8_t clkSource = (RCC->CFGR >> 2) & 0x3UL;
 
-	uint32_t pclk1, sysclk;
-	    uint8_t temp, ahbp, apb1p;
+    if (clkSource == 0) {
+        return 16000000UL; // HSI
+    } else if (clkSource == 1) {
+        return 8000000UL;  // HSE
+    } else if (clkSource == 2) {
+        // Dynamic PLL Calculation
+        uint32_t pllm = RCC->PLLCFGR & 0x3FUL;
+        uint32_t plln = (RCC->PLLCFGR >> 6) & 0x1FFUL;
 
-	    // 1. Get current SYSCLK
-	    sysclk = RCC_GetSysClockValue();
+        uint32_t pllpCode = (RCC->PLLCFGR >> 16) & 0x3UL;
+        uint32_t pllp = (pllpCode + 1) * 2; // Convert 0,1,2,3 to 2,4,6,8
 
-	    // 2. Read AHB Prescaler (HPRE: bits 7:4 in RCC_CFGR)
-	    temp = (RCC->CFGR >> 4) & 0xFUL;
-	    ahbp = AHBPrescalerTable[temp];
+        uint32_t pllSrc = (RCC->PLLCFGR >> 22) & 0x1UL;
+        uint32_t pllInClk = (pllSrc == 1) ? 8000000UL : 16000000UL;
 
-	    // 3. Read APB1 Prescaler (PPRE1: bits 12:10 in RCC_CFGR)
-	    temp = (RCC->CFGR >> 10) & 0x7UL;
-	    apb1p = APBPrescalerTable[temp];
+        return ((pllInClk / pllm) * plln) / pllp;
+    }
 
-	    // 4. Calculate PCLK1
-	    pclk1 = (sysclk / ahbp) / apb1p;
-	    return pclk1;
+    return 16000000UL; // Fallback to HSI
 }
 
 uint32_t RCC_GetPCLK2Value(void) {
@@ -122,7 +130,7 @@ void RCC_AHB1_ClockControl(uint8_t bitPos, uint8_t state){
 }
 
 void RCC_APB1_ClockControl(uint8_t bitPos, uint8_t state){
-    if(state == 1) RCC->AHP1ENR |= (1UL << bitPos);
+    if(state == 1) RCC->APB1ENR |= (1UL << bitPos);
     else RCC->APB1ENR &= ~(1UL << bitPos);
 }
 

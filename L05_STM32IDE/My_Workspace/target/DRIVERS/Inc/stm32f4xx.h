@@ -14,6 +14,18 @@
 #define __I  volatile const
 #define __O  volatile
 
+/* Port Code */
+#define GPIO_BASE_TO_CODE(GPIOx) ( (GPIOx == GPIOA) ? 0 : \
+                                   (GPIOx == GPIOB) ? 1 : \
+                                   (GPIOx == GPIOC) ? 2 : \
+                                   (GPIOx == GPIOD) ? 3 : \
+                                   (GPIOx == GPIOE) ? 4 : \
+                                   (GPIOx == GPIOF) ? 5 : \
+                                   (GPIOx == GPIOG) ? 6 : \
+                                   (GPIOx == GPIOH) ? 7 : \
+                                   (GPIOx == GPIOI) ? 8 : 0 )
+
+
 /* ================================================================================= */
 /*                           1. Core & Memory Base Addresses                         */
 /* ================================================================================= */
@@ -31,7 +43,7 @@
 #define AHB2_BASE           (PERIPH_BASE + 0x10000000UL)
 
 /* Core Peripherals */
-#define SCS_BASE            0xE000E000UL
+#define SCS_BASE            (0xE000E000UL)
 #define NVIC_BASE           (SCS_BASE + 0x0100UL)
 #define PWR_BASE            (APB1_BASE + 0x7000UL)
 #define FLASH_R_BASE        (AHB1_BASE + 0x3C00UL)
@@ -149,6 +161,20 @@ typedef struct {
     __IO uint32_t OPTCR;   /* 0x14: Flash option control register */
 } FLASH_RegDef_t;
 
+typedef struct {
+    __IO uint32_t ISER[8]; /* 0x000 - 0x01C: Interrupt Set Enable Registers */
+    uint32_t      RESERVED0[24];
+    __IO uint32_t ICER[8]; /* 0x080 - 0x09C: Interrupt Clear Enable Registers */
+    uint32_t      RESERVED1[24];
+    __IO uint32_t ISPR[8]; /* 0x100 - 0x11C: Interrupt Set Pending Registers */
+    uint32_t      RESERVED2[24];
+    __IO uint32_t ICPR[8]; /* 0x180 - 0x19C: Interrupt Clear Pending Registers */
+    uint32_t      RESERVED3[24];
+    __IO uint32_t IABR[8]; /* 0x200 - 0x21C: Interrupt Active Bit Registers */
+    uint32_t      RESERVED4[56];
+    __IO uint8_t  IPR[240];/* 0x300 - 0x3EF: Interrupt Priority Registers (Byte Accessible) */
+} NVIC_RegDef_t;
+
 /* ================================================================================= */
 /*                         4. Peripheral Instance Definitions                        */
 /* ================================================================================= */
@@ -165,9 +191,10 @@ typedef struct {
 
 #define RCC                 ((RCC_RegDef_t *)  RCC_BASE)
 #define EXTI                ((EXTI_RegDef_t *) EXTI_BASE)
-#define SYSCFG              ((SYSCFG_RegDef_t *)SYSCFG_BASE)
+#define SYSCFG              ((SYSCFG_RegDef_t *) SYSCFG_BASE)
 #define PWR                 ((PWR_RegDef_t *) PWR_BASE)
 #define FLASH               ((FLASH_RegDef_t *) FLASH_R_BASE)
+#define NVIC                ((NVIC_RegDef_t *) NVIC_BASE)
 
 /* ================================================================================= */
 /*                     5. Clock Enable / Disable Macros                              */
