@@ -47,7 +47,6 @@
 #define NVIC_BASE           (SCS_BASE + 0x0100UL)
 #define PWR_BASE            (APB1_BASE + 0x7000UL)
 #define FLASH_R_BASE        (AHB1_BASE + 0x3C00UL)
-
 /* ================================================================================= */
 /*                        2. AHB1 & APB Peripheral Bases                             */
 /* ================================================================================= */
@@ -79,6 +78,15 @@
 #define SPI1_BASE           (APB2_BASE + 0x3000UL)
 #define SYSCFG_BASE         (APB2_BASE + 0x3800UL)
 #define EXTI_BASE           (APB2_BASE + 0x3C00UL)
+
+/* SYSTICK */
+#define SYSTICK_BASE        (0xE000E010UL)
+
+/* Timer */
+#define TIM2_BASE           (APB1_BASE + 0x0000UL)
+#define TIM3_BASE           (APB1_BASE + 0x0400UL)
+#define TIM4_BASE           (APB1_BASE + 0x0800UL)
+#define TIM5_BASE           (APB1_BASE + 0x0C00UL)
 
 /* ================================================================================= */
 /*                           3. Register Structure Maps                              */
@@ -175,6 +183,51 @@ typedef struct {
     __IO uint8_t  IPR[240];/* 0x300 - 0x3EF: Interrupt Priority Registers (Byte Accessible) */
 } NVIC_RegDef_t;
 
+typedef struct {
+    __IO uint32_t CTRL;  /* 0x00 SysTick Control and Status Register */
+    __IO uint32_t LOAD;  /* 0x04 SysTick Reload Value Register */
+    __IO uint32_t VAL;   /* 0x08 SysTick Current Value Register */
+    __I  uint32_t CALIB; /* 0x0C SysTick Calibration Value Register */
+} SysTick_RegDef_t;
+
+typedef struct
+{
+  __IO uint32_t CR1;        /*!< SPI Control Register 1,          Address offset: 0x00 */
+  __IO uint32_t CR2;        /*!< SPI Control Register 2,          Address offset: 0x04 */
+  __IO uint32_t SR;         /*!< SPI Status Register,              Address offset: 0x08 */
+  __IO uint32_t DR;         /*!< SPI Data Register,                Address offset: 0x0C */
+  __IO uint32_t CRCPR;      /*!< SPI CRC Polynomial Register,     Address offset: 0x10 */
+  __IO uint32_t RXCRCR;     /*!< SPI RX CRC Register,             Address offset: 0x14 */
+  __IO uint32_t TXCRCR;     /*!< SPI TX CRC Register,             Address offset: 0x18 */
+  __IO uint32_t I2SCFGR;    /*!< SPI_I2S Configuration Register,  Address offset: 0x1C */
+  __IO uint32_t I2SPR;      /*!< SPI_I2S Prescaler Register,      Address offset: 0x20 */
+} SPI_RegDef_t;
+
+typedef struct
+{
+  __IO uint32_t CR1;         /*!< TIM control register 1,              Address offset: 0x00 */
+  __IO uint32_t CR2;         /*!< TIM control register 2,              Address offset: 0x04 */
+  __IO uint32_t SMCR;        /*!< TIM slave mode control register,     Address offset: 0x08 */
+  __IO uint32_t DIER;        /*!< TIM DMA/interrupt enable register,   Address offset: 0x0C */
+  __IO uint32_t SR;          /*!< TIM status register,                 Address offset: 0x10 */
+  __IO uint32_t EGR;         /*!< TIM event generation register,       Address offset: 0x14 */
+  __IO uint32_t CCMR1;       /*!< TIM capture/compare mode register 1, Address offset: 0x18 */
+  __IO uint32_t CCMR2;       /*!< TIM capture/compare mode register 2, Address offset: 0x1C */
+  __IO uint32_t CCER;        /*!< TIM capture/compare enable register, Address offset: 0x20 */
+  __IO uint32_t CNT;         /*!< TIM counter register,                Address offset: 0x24 */
+  __IO uint32_t PSC;         /*!< TIM prescaler,                       Address offset: 0x28 */
+  __IO uint32_t ARR;         /*!< TIM auto-reload register,            Address offset: 0x2C */
+  __IO uint32_t RESERVED0;   /*!< Reserved space,                      Address offset: 0x30 */
+  __IO uint32_t CCR1;        /*!< TIM capture/compare register 1,      Address offset: 0x34 */
+  __IO uint32_t CCR2;        /*!< TIM capture/compare register 2,      Address offset: 0x38 */
+  __IO uint32_t CCR3;        /*!< TIM capture/compare register 3,      Address offset: 0x3C */
+  __IO uint32_t CCR4;        /*!< TIM capture/compare register 4,      Address offset: 0x40 */
+  __IO uint32_t RESERVED1;   /*!< Reserved space,                      Address offset: 0x44 */
+  __IO uint32_t DCR;         /*!< TIM DMA control register,            Address offset: 0x48 */
+  __IO uint32_t DMAR;        /*!< TIM DMA address for full transfer,   Address offset: 0x4C */
+  __IO uint32_t OR;          /*!< TIM option register (TIM2/TIM5 only),Address offset: 0x50 */
+} TIM_RegDef_t;
+
 /* ================================================================================= */
 /*                         4. Peripheral Instance Definitions                        */
 /* ================================================================================= */
@@ -195,6 +248,16 @@ typedef struct {
 #define PWR                 ((PWR_RegDef_t *) PWR_BASE)
 #define FLASH               ((FLASH_RegDef_t *) FLASH_R_BASE)
 #define NVIC                ((NVIC_RegDef_t *) NVIC_BASE)
+#define SYSTICK             ((SysTick_RegDef_t *) SYSTICK_BASE)
+
+#define SPI1                ((SPI_RegDef_t *) SPI1_BASE)
+#define SPI2                ((SPI_RegDef_t *) SPI2_BASE)
+#define SPI3                ((SPI_RegDef_t *) SPI3_BASE)
+
+#define TIM2                ((TIM_RegDef_t *) TIM2_BASE)
+#define TIM3                ((TIM_RegDef_t *) TIM3_BASE)
+#define TIM4                ((TIM_RegDef_t *) TIM4_BASE)
+#define TIM5                ((TIM_RegDef_t *) TIM5_BASE)
 
 /* ================================================================================= */
 /*                     5. Clock Enable / Disable Macros                              */
